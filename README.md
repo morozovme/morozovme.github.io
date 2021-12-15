@@ -1,2 +1,2 @@
 # morozovme.github.io
-Full-stack engineer CV
+Senior Devops / wannabe Software Engineer :)
