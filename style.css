@@ -3,12 +3,15 @@
     padding: 0px;
     font-family: Poppins;
 }
-/*body {
+
+/*
+body {
     margin: 0px !important;
     overflow: hidden !important;
     background: #171723 !important;
 }
 */
+
 .webgl{
     position: absolute;
     top: 0;
