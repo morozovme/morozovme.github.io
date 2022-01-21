@@ -25,7 +25,11 @@
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
+        <script type="text/javascript" src="../libs/three.js"></script>
+        <script type="text/javascript" src="../libs/STLLoader.js"></script>
+    
+        <script type="text/javascript" src="../libs/stats.js"></script>
+        <script type="text/javascript" src="../libs/dat.gui.js"></script>
         <br>
         <br>
         <br>
@@ -58,7 +62,7 @@
               <p class="list-group-item-text text-light"> Progamming, Testing, CI/CD, Administration </p>
               </a>
               
-              <div id="collapse1" class="collapse">
+              <div id="collapse1" class="collapse">Ф
                 <div class="card-body text-light">
                 <br>
                 <h1 class="text-light"> Core skills </h1>
@@ -103,10 +107,10 @@
                 <div class="bar admin intermediate" data-skill="SparkleFormation"></div>
                 <div class="bar admin intermediate" data-skill="stack_master"></div>
                 <div class="bar admin intermediate" data-skill="IaC"></div>
-                <div class="bar admin intermediate" data-skill="localstack"></div>
+                
                 <br>
                 <br>
-                <h3 class="text-light"> CI/CD, build tools, auto-testing, administration</h3>
+                <h3 class="text-light"> CI/CD, build tools, auto-testing </h3>
                 <p> 
                   About DevSecOps, linters, static code analysis tools, build tools, auto-testing frameworks, system administration,
                   CVEs owasp ceh, kubeflow, ML pipelines, Big Data pipelines. 
@@ -115,6 +119,7 @@
                 <div class="bar admin intermediate" data-skill="GitlabCI"></div>
                 <div class="bar admin intermediate" data-skill="Jenkins"></div>
                 <div class="bar admin advanced" data-skill="Bamboo"></div>
+                <div class="bar admin intermediate" data-skill="localstack"></div>
                 <div class="bar back learning" data-skill="Maven Gradle"></div>
                 <div class="bar back advanced" data-skill="npm yarn"></div>
                 <div class="bar back intermediate" data-skill="Cargo"></div>
@@ -126,7 +131,7 @@
                 <div class="bar back learning" data-skill="ML"></div>
                 <div class="bar back advanced" data-skill="Linux"></div>
                 <div class="bar back advanced" data-skill="Networking"></div>
-                <div class="bar back advanced" data-skill="Security"></div>
+                <div class="bar back advanced" data-skill="Web Security"></div>
                 <br>
                 <h3 class="text-light"> Virtualization, container technologies, orchestration </h3>
                 <p> This is a paragraph Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -164,14 +169,32 @@
                 </p>
                 <div class="bar back advanced" data-skill="Python"></div>
                 <div class="bar back basic" data-skill="Ruby"></div>
-                <div class="bar back" data-skill="Rust"></div>
-                <div class="bar back" data-skill="Golang"></div>
+                <div class="bar back basic" data-skill="Rust"></div>
+                <div class="bar back basic" data-skill="Golang"></div>
                 <div class="bar back learning" data-skill="Java"></div>
                 <div class="bar back learning" data-skill="C/Cpp"></div>
                 <div class="bar back basic" data-skill="PHP"></div>
                 <div class="bar front intermediate" data-skill="JavaScript"></div>
                 <div class="bar front intermediate" data-skill="HTML5/CSS3"></div>
                 <div class="bar front basic" data-skill="WebAssembly"></div>
+                <br>
+                <h3 class="text-light"> Administration </h3>
+                <p> This is a paragraph Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
+                </p>
+                <div class="bar admin intermediate" data-skill="nginx"></div>
+                <div class="bar admin intermediate" data-skill="apache"></div>
+                <div class="bar admin intermediate" data-skill="tomcat"></div>
+                <div class="bar admin intermediate" data-skill="NFS"></div>
+                <div class="bar admin intermediate" data-skill="SMB"></div>
+                <div class="bar admin intermediate" data-skill="Networking"></div>
+                <div class="bar admin intermediate" data-skill="iptables"></div>
+                <div class="bar admin intermediate" data-skill="firewalld"></div>
+                <div class="bar admin intermediate" data-skill="yum apt"></div>
+                <div class="bar admin intermediate" data-skill="grub"></div>
+                <div class="bar admin intermediate" data-skill="dmesg"></div>
+                <div class="bar admin intermediate" data-skill="gdb"></div>
+                <br>
                 </div>
                 </div>
               </div>
@@ -199,7 +222,7 @@
                           </p>
                           <h1> Job experience </h1>
                           <p> 
-                            
+
                             This is a paragraph Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
                           </p>
@@ -321,10 +344,108 @@
   </div>
 </div>
 </div>
+<div id="WebGL-output">
+</div>
+
+<script type="text/javascript">
+
+  // once everything is loaded, we run our Three.js stuff.
+  function init() {
+
+      //var stats = initStats();
+
+      // create a scene, that will hold all our elements such as objects, cameras and lights.
+      var scene = new THREE.Scene();
+
+      // create a camera, which defines where we're looking at.
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+      // create a render and set the size
+      var webGLRenderer = new THREE.WebGLRenderer();
+      webGLRenderer.setClearColor(new THREE.Color(0x000, 1.0));
+      webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+      webGLRenderer.shadowMapEnabled = true;
+
+      // position and point the camera to the center of the scene
+      camera.position.x = 150;
+      camera.position.y = 150;
+      camera.position.z = 150;
+      camera.lookAt(new THREE.Vector3(0, 40, 0));
+
+      // add spotlight for the shadows
+      var spotLight = new THREE.SpotLight(0xffffff);
+      spotLight.position.set(150, 150, 150);
+      scene.add(spotLight);
+
+      // add the output of the renderer to the html element
+      document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);
+
+      // call the render function
+      var step = 0;
+
+
+      // setup the control gui
+      var controls = new function () {
+          // we need the first child, since it's a multimaterial
+
+
+      };
+
+      var group;
+      var gui = new dat.GUI();
+
+
+      // model from http://www.thingiverse.com/thing:69709
+      var loader = new THREE.STLLoader();
+      var group = new THREE.Object3D();
+      loader.load("./infinity.stl", function (geometry) {
+          console.log(geometry);
+          var mat = new THREE.MeshLambertMaterial({color: 0x7777ff});
+          group = new THREE.Mesh(geometry, mat);
+          group.rotation.x = -0.5 * Math.PI;
+          group.scale.set(100, 100, 100);
+          scene.add(group);
+      });
+
+
+      render();
+
+
+      function render() {
+          //stats.update();
+
+          if (group) {
+              group.rotation.z += 0.006;
+              // group.rotation.x+=0.006;
+          }
+
+          // render using requestAnimationFrame
+          requestAnimationFrame(render);
+          webGLRenderer.render(scene, camera);
+      }
+
+      function initStats() {
+
+          var stats = new Stats();
+          stats.setMode(0); // 0: fps, 1: ms
+
+          // Align top-left
+          stats.domElement.style.position = 'absolute';
+          stats.domElement.style.left = '0px';
+          stats.domElement.style.top = '0px';
+
+          document.getElementById("Stats-output").appendChild(stats.domElement);
+
+          return stats;
+      }
+  }
+  window.onload = init;
+</script>
+
 <br>
 <br>
 <br>
-<br>          
+<br>     
 <br>
 <br>
 

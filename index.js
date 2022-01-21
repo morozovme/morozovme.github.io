@@ -1,9 +1,11 @@
 import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js'
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
+
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+
 
 const textureLoader = new THREE.TextureLoader()
 const myTexture = textureLoader.load('coolTex.jpg')
@@ -16,13 +18,38 @@ const material = new THREE.MeshBasicMaterial({
 })
 const boxMesh = new THREE.Mesh(geometry,material)
 const sphereMesh = new THREE.Mesh(geometry2,material)
-scene.add(boxMesh)
-// scene.add(sphereMesh)
+scene.add(boxMesh);
+scene.add(sphereMesh);
 boxMesh.position.x = 0
 boxMesh.position.y = 0.8
 sphereMesh.position.x = -1.6
 sphereMesh.position.y = 0.5
 geometry.center()
+
+// infinity
+
+//var STLLoader = require('three-stl-loader')(THREE)
+//import { STLLoader } from './libs/STLLoader.js'
+//const loader = new STLLoader();
+//const geometry3 = loader.load("infinity.stl")
+//const infinityMesh = new THREE.Mesh(geometry3,material)
+//scene.add(infinityMesh);
+
+
+
+
+
+//const loader = new THREE.STLLoader();
+//const group = new THREE.Object3D();
+//loader.load("./infinity.stl", function (geometry) {
+//console.log(geometry);
+//var mat = new THREE.MeshLambertMaterial({color: 0x7777ff});
+//group = new THREE.Mesh(geometry, mat);
+//group.rotation.x = -0.5 * Math.PI;
+//group.scale.set(100, 100, 100);
+//scene.add(group);
+//});
+
 // Sizes
 const sizes = {
     width:window.innerWidth,
