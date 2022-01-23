@@ -388,12 +388,12 @@ const material = new THREE.MeshBasicMaterial({
 const loader = new THREE.STLLoader();
 var group = new THREE.Object3D();
 console.log("loader: " + loader);
-loader.load("./infinity.stl", function (geometry) {
+loader.load("./infinity3.stl", function (geometry) {
           console.log(geometry);
           //var mat = new THREE.MeshLambertMaterial({color: 0x7777ff});
-          group = new THREE.Mesh(geometry, material);
+          group = new THREE.Mesh(geometry);
           group.rotation.x = -1 * Math.PI;
-          group.position.x = -1;
+          group.position.x = -0.9;
           group.position.y = 1.5;
           group.scale.set(1, 1, 1);
           scene.add(group);
