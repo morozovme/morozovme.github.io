@@ -455,8 +455,6 @@
   </div>
 </div>
 </div>
-<div id="WebGL-output">
-</div>
 
 <script type="text/javascript">
 
@@ -464,32 +462,6 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-
-const geometry = new THREE.BoxGeometry(1,1,1)
-const geometry2 = new THREE.DodecahedronGeometry(0.5,3)
-
-// Object
-const textureLoader = new THREE.TextureLoader()
-const myTexture = textureLoader.load('coolTex.jpg')
-
-const material = new THREE.MeshBasicMaterial({
-    map: myTexture
-})
-//const boxMesh = new THREE.Mesh(geometry,material)
-//const sphereMesh = new THREE.Mesh(geometry2,material)
-//scene.add(boxMesh);
-//scene.add(sphereMesh);
-//boxMesh.position.x = 0
-//boxMesh.position.y = 0.8
-//sphereMesh.position.x = -1.6
-//sphereMesh.position.y = 0.5
-//geometry.center()
-
-// infinity
-
-//var STLLoader = require('three-stl-loader')(THREE)
-//import { STLLoader } from './libs/STLLoader.js'
-
 const loader = new THREE.STLLoader();
 var group = new THREE.Object3D();
 console.log("loader: " + loader);
@@ -503,35 +475,6 @@ loader.load("./infinity3.stl", function (geometry) {
           group.scale.set(1, 1, 1);
           scene.add(group);
 });
-//console.log("geometry3 : " + geometry3);
-//const infinityMesh = new THREE.Mesh(geometry3,material)
-//infinityMesh.scale.set(100, 100, 100);
-//infinityMesh.position.x = 1.6
-//infinityMesh.position.y = -0.5
-//infinityMesh.rotation.x = -0.5 * Math.PI;
-//scene.add(infinityMesh);
-//geometry.center()
-
-//var loader = new THREE.STLLoader();
-//      var group = new THREE.Object3D();
-//      loader.load("./infinity.stl", function (geometry) {
-//          console.log(geometry);
-//          var mat = new THREE.MeshLambertMaterial({color: 0x7777ff});
-//          group = new THREE.Mesh(geometry, mat);
-//          group.rotation.x = -0.5 * Math.PI;
-//          group.scale.set(100, 100, 100);
-//          scene.add(group);
-//      });
-//const loader = new THREE.STLLoader();
-//const group = new THREE.Object3D();
-//loader.load("./infinity.stl", function (geometry3) {
-//console.log(geometry);
-//var mat = new THREE.MeshLambertMaterial({color: 0x7777ff});
-//group = new THREE.Mesh(geometry, mat);
-//group.rotation.x = -0.5 * Math.PI;
-//group.scale.set(100, 100, 100);
-//scene.add(group);
-//});
 
 // Sizes
 const sizes = {
